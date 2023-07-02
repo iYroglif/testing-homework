@@ -43,7 +43,7 @@ export type Action =
 
 // reducer
 
-function createRootReducer(state: Partial<ApplicationState>) {
+export function createRootReducer(state: Partial<ApplicationState>) {
     const defaultState = { ...DEFAULT_STATE, ...state };
 
     const fn = (state: ApplicationState = defaultState, action: Action): ApplicationState => produce(state, draft => {

@@ -76,7 +76,7 @@ export const Cart: React.FC = () => {
     const actions = cartIsEmpty ? null : (
         <div className="row mb-4">
             <div className="col-6">
-                <button className={bem('Clear', ['btn', 'btn-outline-secondary'])} onClick={onClear}>Clear shopping cart</button>
+                <button className={bem('Clear', ['btn', 'btn-outline-secondary'])} onClick={onClear} data-testid="clear-button">Clear shopping cart</button>
             </div>
         </div>
     );
@@ -95,9 +95,9 @@ export const Cart: React.FC = () => {
     const orderInfo = cartIsEmpty && latestOrderId ? (
         <div className="row my-2">
             <div className="col-12 col-sm-8 col-md-6">
-                <div className={bem('SuccessMessage', ['alert', alertClass])}>
+                <div className={bem('SuccessMessage', ['alert', alertClass])} data-testid="success-alert">
                     <h4 className="alert-heading">Well done!</h4>
-                    <p>Order #<strong className={bem('Number')}>{latestOrderId}</strong> has been successfully completed.</p>
+                    <p>Order #<strong className={bem('Number')} data-testid="order-id">{latestOrderId}</strong> has been successfully completed.</p>
                     <hr/>
                     <p className="mb-0">Please wait for confirmation of delivery.</p>
                 </div>
