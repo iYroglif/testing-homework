@@ -1,3 +1,11 @@
+### Настройка
+
+Для MacOS нужно изменить строчки в package.json
+```
+"test:e2e": "./node_modules/.bin/hermione",
+"test:e2e:gui": "./node_modules/.bin/hermione gui",
+```
+
 ### Версия node и npm
 
 ```
@@ -14,10 +22,27 @@ npm -v
 npm ci
 npm run build
 
+# windows
 $env:BUG_ID = {номер бага}; npm run start
-
 $env:BUG_ID = {номер бага}; npm run test
+
+# macos
+BUG_ID={номер бага} npm run start
+BUG_ID={номер бага} npm run test
 ```
+Для гермионы всегда нужно запущенное приложение
+
+### Первый запуск
+
+Скорее всего нужно будет обновить эталонные скриншоты в гермионе
+```
+npm run start
+npm run test:e2e:gui
+```
+В gui надо будет везде прожать Accept
+
+Текущие проблемы:
+На маке все время падает один юнит тест, хотя на винде норм
 
 ### Тесты по bug_id
 
