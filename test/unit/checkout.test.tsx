@@ -23,6 +23,16 @@ jest.mock("../../src/client/components/Form", () => ({
     ),
 }));
 
+jest.mock("../../src/client/api", () => {
+    const originalModule = jest.requireActual("../../src/client/api");
+    return {
+        ...originalModule,
+        ExampleApi: jest.fn().mockImplementation(() => ({
+            checkout: jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: { id: 1 } })),
+        })),
+    };
+});
+
 describe("Shopping cart", () => {
     it("если нажать на кнопку checkout то происходит отправка запроса с заказом на сервер", async () => {
         const basename = "/";
@@ -48,12 +58,11 @@ describe("Shopping cart", () => {
 
         const { getByTestId } = render(cartComponent);
 
-        const apiCheckoutSpy = jest.spyOn(api, "checkout");
         const checkoutButton = getByTestId("checkout-button");
         const user = userEvent.setup();
 
         await user.click(checkoutButton);
 
-        expect(apiCheckoutSpy).toBeCalledWith(checkoutFormData, cartState);
+        expect(api.checkout).toBeCalledWith(checkoutFormData, cartState);
     });
 });
